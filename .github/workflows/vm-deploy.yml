@@ -97,11 +97,13 @@ jobs:
           (cd "$GITHUB_WORKSPACE" && zip -r "$ZIP_NAME" "deployment-package")
           echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
 
+
       - name: Azure login (client secret)
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
          
+
       - name: Upload deployment package artifact
         uses: actions/upload-artifact@v4.6.2
         with:
@@ -285,3 +287,5 @@ jobs:
               --name "$AZURE_VM_NAME" \
               --command-id RunShellScript \
               --scripts "sudo /tmp/deploy.sh '$PACKAGE_SAS_URL'"
+
+              
